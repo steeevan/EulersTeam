@@ -139,6 +139,25 @@
             width: 200px;
             border-radius: 10px;
         }
+        
+        button {
+        background-color: green;
+        border: none;
+        color: white;
+        padding: 7px 14px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        }
+        button:hover {
+        background-color: greenyellow;
+        color: darkgreen; 
+        }  
+    
     </style>
 </head>
 <body>
@@ -293,6 +312,10 @@
                 </p>
             </div>
         </div>
-
+        <div>
+            <a href="{{ url_for('main.index') }}">
+                  <button type="button">Back to Home</button>
+            </a>
+      </div>
 </body>
 </html>

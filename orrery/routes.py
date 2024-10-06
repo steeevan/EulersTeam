@@ -28,6 +28,9 @@ class MainRoutes:
         @self.blueprint.route('/orbitsim')
         def orbital():
             return render_template('orbit_simulation.html')
+        @self.blueprint.route('/facts')
+        def facts():
+              return render_template('facts.html')
         def back(): 
             return render_template('index.html')
         
