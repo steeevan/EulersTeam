@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+#controls {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+#toggleAttributesButton {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: #008cba;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#toggleAttributesButton:hover {
+    background-color: #005f73;
+}
+
+#attributes {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 350px; /* Adjusted for smaller size */
+    max-height: 300px; /* Limit height to fit neatly */
+    background-color: rgba(255, 255, 255, 0.95); /* White background for Excel-like appearance */
+    color: black;
+    overflow-y: auto;
+    z-index: 2;
+    display: none; /* Initially hidden */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    padding: 10px;
+}
+
+#attributes .overlay-content {
+    padding: 10px;
+}
+
+#attributes table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px; /* Smaller font size for fitting */
+    color: black; /* Text color set to black for contrast */
+}
+
+#attributes th,
+#attributes td {
+    border: 1px solid #ccc; /* Lighter border for cleaner look */
+    padding: 4px;
+    text-align: center; /* Center alignment for a more Excel-like feel */
+}
+
+#attributes th {
+    background-color: #f1f1f1; /* Light grey for header */
+    font-weight: bold;
+}
+
+#attributes tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternating row colors for clarity */
+}
+
+#attributes tr:hover {
+    background-color: #e6e6e6; /* Highlight row on hover for better readability */
+}
+
+.close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #444;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.close-button:hover {
+    background-color: #222;
+}
+
+/* Utility class to hide the overlay */
+.hidden {
+    display: none;
+}

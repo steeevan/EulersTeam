@@ -24,6 +24,10 @@ class MainRoutes:
         @self.blueprint.route('/neopage')
         def neopage():
             return render_template('neopage.html',json_neos_data=neos_data)
+        
+        @self.blueprint.route('/orbitsim')
+        def orbital():
+            return render_template('orbit_simulation.html')
         def back(): 
             return render_template('index.html')
         
