@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+      <title>Solar System Orbit Simulation with Planet and Asteroid Attributes</title>
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/orbit_simulation.css')}}">
+</head>
+
+<body>
+    <div id="controls">
+        <label for="speedSlider">Orbit Speed:</label>
+        <input type="range" id="speedSlider" min="1" max="5" step="0.1" value="2">
+        <br><br>
+        <label for="scaleSlider">Solar System Scale:</label>
+        <input type="range" id="scaleSlider" min="0.5" max="3" step="0.1" value="1">
+        <br><br>
+        <button id="toggleAttributesButton">Show Planet Attributes</button>
+        <br><br>
+    </div>
+    <div id="attributes" class="overlay hidden">
+        <div class="overlay-content">
+            <button id="closeAttributesButton" class="close-button">X</button>
+            <h2>Planet Attributes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Diameter (km)</th>
+                        <th>Distance from Sun (km)</th>
+                        <th>Orbital Speed (km/s)</th>
+                        <th>Hours per Day</th>
+                    </tr>
+                </thead>
+                <tbody id="planetAttributesTable"></tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="{{ url_for('static', filename='js/orbit_simulation.js') }}"></script>
+</body>
+<html>
