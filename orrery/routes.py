@@ -21,6 +21,9 @@ class MainRoutes:
         @self.blueprint.route('/neopage')
         def neopage():
               return render_template('neopage.html',json_neos_data=neos_data)
+        @self.blueprint.route('/facts')
+        def facts():
+              return render_template('facts.html')
         
 #test = MainRoutes()
 
@@ -203,7 +206,7 @@ if isinstance(data.get('near_earth_objects'), dict):
                         neo_entry['orbiting_body'] = 'Unknown'  # No close approach data, set orbiting_body to 'Unknown'
                     
                     neos_data.append(neo_entry)
-                    
+
 # Sort NEOs by distance from Earth, only if 'close_approach_data' exists and contains valid data
 neos_data.sort(key=lambda x: float(x['close_approach_data'].get('miss_distance', {}).get('kilometers', float('inf'))))
 '''
