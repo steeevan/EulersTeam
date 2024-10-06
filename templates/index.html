@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEO PAGE</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/styles.css')}}">
+    <style>
+      #spacebutton {
+            position: relative;
+            bottom: -4px;
+      }
+    </style>
 </head>
 <body>
       <div>
@@ -18,6 +24,9 @@
       <a href="{{ url_for('main.aboutus') }}">
             <button type="button" onclick="alert('Going to the About Us page...') "  >About Us</button>
       </a>
+    </div>
+    <div id = "spacebutton">
+      <button type="button" onclick="alert('Going to the simulation...')" >Space Simulation</button>
     </div>
 </body>
 </html>
