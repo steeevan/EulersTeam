@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Near-Earth Objects</title>
+</head>
+<body>
+    <header>
+        <h1>Near-Earth Objects (NEOs)</h1>
+        <p>Here you can find a list of Near-Earth Objects, sorted from closest to furthest distance from Earth.</p>
+        <div class="navigation-buttons">
+            <a href="{{ url_for('main.index') }}" class="button">Back to Home</a>
+        </div>
+        <div id="neo-grid" class="grid-container"></div>
+        <div class="pagination-controls">
+            <button id="prev-page" disabled>Previous Page</button>
+            <button id="next-page">Next Page</button>
+        </div>
+        <div id="page-navigation" class="page-navigation-controls"></div>
+    </header>
+    <footer>
+        <section id="neo-description">
+            <h2>What are Near-Earth Objects (NEOs)?</h2>
+            <p>Near-Earth Objects are asteroids and comets that have been nudged by the gravitational attraction of nearby planets into orbits that allow them to enter the Earth's neighborhood. Studying NEOs helps scientists understand the characteristics of early solar system materials and assess any potential threat they may pose to Earth.</p>
+            <p>NASA actively monitors NEOs to study their properties and, if needed, develop plans to prevent potential impacts. The NEOs listed on this page provide insights into their sizes, velocities, and distances from Earth, offering valuable data for both research and education.</p>
+        </section>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentPage = 1;
+            let totalPages = 1;
+
+            // Fetch NEO data for the current page from Flask endpoint
+            function fetchNeos(page) {
+                fetch(`/api/neos_sorted?page=${page}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            console.error('Error fetching data from NASA API:', data.error);
+                        } else {
+                            totalPages = data.total_pages;
+                            displayNeos(data.neos);
+                            updatePageNavigation();
+                        }
+                    })
+                    .catch(error => console.error('Error fetching NEO data:', error));
+            }
+
+            // Function to display NEO data in a grid
+            function displayNeos(neos) {
+                const gridContainer = document.getElementById('neo-grid');
+                gridContainer.innerHTML = ''; // Clear the previous data
+
+                if (neos.length === 0) {
+                    gridContainer.innerHTML = '<p>No Near-Earth Objects available to display.</p>';
+                    return;
+                }
+
+                neos.forEach(neo => {
+                    const neoCard = document.createElement('div');
+                    neoCard.className = 'neo-card';
+
+                    const name = document.createElement('h2');
+                    name.textContent = `Name: ${neo.name}`;
+
+                    const distance = document.createElement('p');
+                    if (neo.close_approach_data && neo.close_approach_data.miss_distance) {
+                        distance.textContent = `Distance from Earth: ${neo.close_approach_data.miss_distance.kilometers} km`;
+                    } else {
+                        distance.textContent = `Distance from Earth: Unknown`;
+                    }
+
+                    const diameter = document.createElement('p');
+                    diameter.textContent = `Estimated Diameter: ${neo.estimated_diameter.toFixed(2)} meters`;
+
+                    // Add more detailed information
+                    const velocity = document.createElement('p');
+                    if (neo.close_approach_data && neo.close_approach_data.relative_velocity) {
+                        velocity.textContent = `Velocity: ${neo.close_approach_data.relative_velocity.kilometers_per_hour} km/h`;
+                    } else {
+                        velocity.textContent = `Velocity: Unknown`;
+                    }
+
+                    const orbitingBody = document.createElement('p');
+                    orbitingBody.textContent = `Orbiting Body: ${neo.close_approach_data.orbiting_body || 'Unknown'}`;
+
+                    const approachDate = document.createElement('p');
+                    approachDate.textContent = `Close Approach Date: ${neo.close_approach_data.close_approach_date || 'Unknown'}`;
+
+                    // Append all information to the card
+                    neoCard.appendChild(name);
+                    neoCard.appendChild(distance);
+                    neoCard.appendChild(diameter);
+                    neoCard.appendChild(velocity);
+                    neoCard.appendChild(orbitingBody);
+                    neoCard.appendChild(approachDate);
+
+                    gridContainer.appendChild(neoCard);
+                });
+
+                // Update pagination controls
+                document.getElementById('prev-page').disabled = (currentPage === 1);
+                document.getElementById('next-page').disabled = (currentPage >= totalPages);
+            }
+
+            // Pagination controls
+            document.getElementById('prev-page').addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    fetchNeos(currentPage);
+                }
+            });
+
+            document.getElementById('next-page').addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    fetchNeos(currentPage);
+                }
+            });
+
+            // Function to update the page navigation at the bottom
+            function updatePageNavigation() {
+                const pageNavContainer = document.getElementById('page-navigation');
+                pageNavContainer.innerHTML = ''; // Clear previous page links
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const pageLink = document.createElement('button');
+                    pageLink.className = 'page-button';
+                    pageLink.textContent = i;
+                    pageLink.addEventListener('click', () => {
+                        currentPage = i;
+                        fetchNeos(currentPage);
+                    });
+                    pageNavContainer.appendChild(pageLink);
+                }
+            }
+
+            // Initial fetch
+            fetchNeos(currentPage);
+        });
+    </script>
+</body>
+</html>
