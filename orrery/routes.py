@@ -17,11 +17,12 @@ class MainRoutes:
             return render_template('index.html')
         @self.blueprint.route('/aboutus')
         def aboutus():
-              return render_template('aboutUS.html')
+            return render_template('aboutUS.html')
         @self.blueprint.route('/neopage')
         def neopage():
-              return render_template('neopage.html',json_neos_data=neos_data)
-        def back(): return render_template('index.html')
+            return render_template('neopage.html',json_neos_data=neos_data)
+        def back(): 
+            return render_template('index.html')
         
 #test = MainRoutes()
 
