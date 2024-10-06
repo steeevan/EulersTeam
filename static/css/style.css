@@ -1,0 +1,103 @@
+body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+  }
+  
+  header {
+      margin-top: 20px;
+      padding: 20px;
+  }
+  
+  header h1 {
+      font-size: 2.5em;
+      color: #333366;
+  }
+  
+  header p {
+      font-size: 1.2em;
+      color: #666;
+  }
+  
+  .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 1200px;
+  }
+  
+  .neo-card {
+      border: 1px solid #ccc;
+      padding: 20px;
+      background-color: #e6f7ff;
+      border-radius: 10px;
+      text-align: left;
+      transition: transform 0.2s;
+  }
+  
+  .neo-card:hover {
+      transform: scale(1.05);
+  }
+  
+  .neo-card h2 {
+      font-size: 1.5em;
+      color: #333366;
+  }
+  
+  .neo-card p {
+      font-size: 1em;
+      color: #666;
+  }
+  
+  .pagination-controls, .page-navigation-controls {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+  }
+  
+  .button, .page-button {
+      background-color: #333366;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+  }
+  
+  .button:hover, .page-button:hover {
+      background-color: #444488;
+  }
+  
+  footer {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #f0f8ff;
+      color: #333;
+  }
+  
+  #neo-description {
+      text-align: left;
+      max-width: 800px;
+      margin: 0 auto;
+  }
+  
+  #neo-description h2 {
+      color: #333366;
+      font-size: 1.8em;
+      margin-bottom: 10px;
+  }
+  
+  #neo-description p {
+      font-size: 1.1em;
+      color: #666;
+      line-height: 1.6em;
+  }
+  

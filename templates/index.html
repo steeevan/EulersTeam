@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">    
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Interactive Orrery Web App</title>
-
-    
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/styles.css')}}">
 </head>
 <body>
-      <div id="top">
-            <h1>Welcome to the Interactive Web App</h1>
-            <p>This app provides a fun and engaging experience to help users learn more about space and the different wonders of the universe.</p>
-      </div>
-    <div>
-      <a href="{{ url_for('main.aboutus') }}">
-            <button type="button" onclick="alert('Going to the team members..') "  >About the team</button>
-      </a>
-    </div>
-    
-    <button type="button" onclick="alert('Going to the app..')">Space App</button>
+    <header>
+        <h1>Welcome to the Interactive Orrery Web Application</h1>
+        <p>Explore celestial bodies such as planets, Near-Earth Asteroids, and Potentially Hazardous Asteroids!</p>
+        <p>This project provides an educational and engaging experience to understand our universe better by visualizing real-time data from NASA's NEO API.</p>
+        <div class="navigation-buttons">
+            <a href="{{ url_for('main.neos') }}" class="button">View Near-Earth Objects</a>
+        </div>
+    </header>
+    <footer>
+        <p>Created by Team Orrery Explorers</p>
+    </footer>
 </body>
 </html>
