@@ -4,143 +4,187 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>Near-Earth Objects</title>
+    <title>Near-Earth Object Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="{{ url_for('static', filename='js/render_neo.js') }}"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #003366;
+        }
+
+        #neo-list-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #neo-select {
+            padding: 10px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .neo-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .neo-render-container {
+            flex: 1;
+            height: 500px;
+            border: 1px solid #ccc;
+            background-color: #000;
+            margin-right: 20px;
+            border-radius: 10px;
+        }
+
+        .neo-details {
+            flex: 1;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            max-width: 400px;
+        }
+
+        .neo-details h2 {
+            color: #003366;
+            font-size: 1.8em;
+        }
+
+        .neo-details p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+
+        .neo-extra-info {
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Near-Earth Objects (NEOs)</h1>
-        <p>Here you can find a list of Near-Earth Objects, sorted from closest to furthest distance from Earth.</p>
-        <div class="navigation-buttons">
-            <a href="{{ url_for('main.index') }}" class="button">Back to Home</a>
+    <div class="content-wrapper">
+        <header>
+            <h1>Explore Near-Earth Objects (NEOs)</h1>
+            <p>Select a Near-Earth Object from the list to see its details and a 3D visualization.</p>
+            <div id="neo-list-container">
+                <select id="neo-select">
+                    <option value="">Select a NEO</option>
+                </select>
+            </div>
+        </header>
+        <div class="neo-container">
+            <div id="neo-render-container" class="neo-render-container">
+                <p style="text-align: center; color: white; padding-top: 220px;">3D model will load here...</p>
+            </div>
+            <div class="neo-details">
+                <h2 id="neo-name">NEO Name</h2>
+                <p id="neo-diameter">Diameter: Loading...</p>
+                <p id="neo-distance">Distance from Earth: Loading...</p>
+                <p id="neo-magnitude">Absolute Magnitude: Loading...</p>
+                <div class="neo-extra-info">
+                    <p id="neo-description">Description: Loading...</p>
+                    <p id="neo-fun-fact">Fun Fact: Loading...</p>
+                </div>
+            </div>
         </div>
-        <div id="neo-grid" class="grid-container"></div>
-        <div class="pagination-controls">
-            <button id="prev-page" disabled>Previous Page</button>
-            <button id="next-page">Next Page</button>
-        </div>
-        <div id="page-navigation" class="page-navigation-controls"></div>
-    </header>
-    <footer>
-        <section id="neo-description">
-            <h2>What are Near-Earth Objects (NEOs)?</h2>
-            <p>Near-Earth Objects are asteroids and comets that have been nudged by the gravitational attraction of nearby planets into orbits that allow them to enter the Earth's neighborhood. Studying NEOs helps scientists understand the characteristics of early solar system materials and assess any potential threat they may pose to Earth.</p>
-            <p>NASA actively monitors NEOs to study their properties and, if needed, develop plans to prevent potential impacts. The NEOs listed on this page provide insights into their sizes, velocities, and distances from Earth, offering valuable data for both research and education.</p>
-        </section>
-    </footer>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let currentPage = 1;
-            let totalPages = 1;
-
-            // Fetch NEO data for the current page from Flask endpoint
-            function fetchNeos(page) {
-                fetch(`/api/neos_sorted?page=${page}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.error) {
-                            console.error('Error fetching data from NASA API:', data.error);
-                        } else {
-                            totalPages = data.total_pages;
-                            displayNeos(data.neos);
-                            updatePageNavigation();
-                        }
-                    })
-                    .catch(error => console.error('Error fetching NEO data:', error));
-            }
-
-            // Function to display NEO data in a grid
-            function displayNeos(neos) {
-                const gridContainer = document.getElementById('neo-grid');
-                gridContainer.innerHTML = ''; // Clear the previous data
-
-                if (neos.length === 0) {
-                    gridContainer.innerHTML = '<p>No Near-Earth Objects available to display.</p>';
-                    return;
-                }
-
-                neos.forEach(neo => {
-                    const neoCard = document.createElement('div');
-                    neoCard.className = 'neo-card';
-
-                    const name = document.createElement('h2');
-                    name.textContent = `Name: ${neo.name}`;
-
-                    const distance = document.createElement('p');
-                    if (neo.close_approach_data && neo.close_approach_data.miss_distance) {
-                        distance.textContent = `Distance from Earth: ${neo.close_approach_data.miss_distance.kilometers} km`;
-                    } else {
-                        distance.textContent = `Distance from Earth: Unknown`;
-                    }
-
-                    const diameter = document.createElement('p');
-                    diameter.textContent = `Estimated Diameter: ${neo.estimated_diameter.toFixed(2)} meters`;
-
-                    // Add more detailed information
-                    const velocity = document.createElement('p');
-                    if (neo.close_approach_data && neo.close_approach_data.relative_velocity) {
-                        velocity.textContent = `Velocity: ${neo.close_approach_data.relative_velocity.kilometers_per_hour} km/h`;
-                    } else {
-                        velocity.textContent = `Velocity: Unknown`;
-                    }
-
-                    const orbitingBody = document.createElement('p');
-                    orbitingBody.textContent = `Orbiting Body: ${neo.close_approach_data.orbiting_body || 'Unknown'}`;
-
-                    const approachDate = document.createElement('p');
-                    approachDate.textContent = `Close Approach Date: ${neo.close_approach_data.close_approach_date || 'Unknown'}`;
-
-                    // Append all information to the card
-                    neoCard.appendChild(name);
-                    neoCard.appendChild(distance);
-                    neoCard.appendChild(diameter);
-                    neoCard.appendChild(velocity);
-                    neoCard.appendChild(orbitingBody);
-                    neoCard.appendChild(approachDate);
-
-                    gridContainer.appendChild(neoCard);
-                });
-
-                // Update pagination controls
-                document.getElementById('prev-page').disabled = (currentPage === 1);
-                document.getElementById('next-page').disabled = (currentPage >= totalPages);
-            }
-
-            // Pagination controls
-            document.getElementById('prev-page').addEventListener('click', () => {
-                if (currentPage > 1) {
-                    currentPage--;
-                    fetchNeos(currentPage);
-                }
-            });
-
-            document.getElementById('next-page').addEventListener('click', () => {
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    fetchNeos(currentPage);
-                }
-            });
-
-            // Function to update the page navigation at the bottom
-            function updatePageNavigation() {
-                const pageNavContainer = document.getElementById('page-navigation');
-                pageNavContainer.innerHTML = ''; // Clear previous page links
-
-                for (let i = 1; i <= totalPages; i++) {
-                    const pageLink = document.createElement('button');
-                    pageLink.className = 'page-button';
-                    pageLink.textContent = i;
-                    pageLink.addEventListener('click', () => {
-                        currentPage = i;
-                        fetchNeos(currentPage);
+        // Fetch and populate the NEO list
+        function loadNeoList() {
+            fetch('/api/neos_list')
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById('neo-select');
+                    data.neos.forEach(neo => {
+                        const option = document.createElement('option');
+                        option.value = neo.id;
+                        option.textContent = `${neo.name} (ID: ${neo.id})`;
+                        select.appendChild(option);
                     });
-                    pageNavContainer.appendChild(pageLink);
-                }
+                })
+                .catch(error => console.error('Error loading NEO list:', error));
+        }
+    
+        // Fetch details for the selected NEO
+        function fetchNeoDetails(neoId) {
+            if (!neoId) return;
+    
+            fetch(`/api/neo_details?neo_id=${neoId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error('Error fetching NEO details:', data.error);
+                    } else {
+                        displayNeoDetails(data.neo);
+                    }
+                })
+                .catch(error => console.error('Error fetching NEO data:', error));
+        }
+    
+        // Display NEO details
+        function displayNeoDetails(neo) {
+            console.log('NEO Data:', neo); // Log the full NEO data for debugging
+    
+            // Set up the display elements
+            document.getElementById('neo-name').textContent = `Name: ${neo.name}`;
+            document.getElementById('neo-diameter').textContent = `Estimated Diameter: ${neo.estimated_diameter} meters`;
+            document.getElementById('neo-distance').textContent = neo.close_approach_data && neo.close_approach_data.miss_distance
+                ? `Distance from Earth: ${neo.close_approach_data.miss_distance.kilometers} km`
+                : `Distance from Earth: Unknown`;
+            document.getElementById('neo-magnitude').textContent = `Absolute Magnitude: ${neo.absolute_magnitude}`;
+            document.getElementById('neo-description').textContent = `Description: ${neo.description}`;
+            document.getElementById('neo-fun-fact').textContent = `Fun Fact: ${neo.fun_fact}`;
+    
+            // Render NEO using JPL data
+            const renderContainer = document.getElementById('neo-render-container');
+            renderContainer.innerHTML = ''; // Clear previous render
+    
+            if (neo.jpl_data && neo.jpl_data.orbital_data) {
+                createAccurate3DRender(renderContainer, neo.jpl_data);
+            } else {
+                create3DRender(renderContainer); // Fallback to a basic cube
             }
-
-            // Initial fetch
-            fetchNeos(currentPage);
+        }
+    
+        // Event listener for selecting a NEO
+        document.getElementById('neo-select').addEventListener('change', function () {
+            const selectedNeoId = this.value;
+            fetchNeoDetails(selectedNeoId);
         });
+    
+        // Load the NEO list on page load
+        loadNeoList();
     </script>
+    
+    
 </body>
 </html>
