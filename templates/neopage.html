@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEO Page</title>
+    <style>
+        h1 {
+            color:white;
+            text-align: center;
+            
+        }   
+        body {
+            background-image: url('https://www.pbs.org/wgbh/nova/media/images/JWST_hero.width-2000.jpg');
+            color: white;
+        }
+        /* Styling for the NEO cards */
+        .neo-card {
+            border: 1px solid #ccc;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 10px;
+            background-color: #50e4ec;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            display: inline-block;
+        }
+        .neo-card h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #333;
+            text-align: center;
+        }
+        .neo-card p {
+            margin: 8px 0;
+            color: #555;
+            text-align: center;
+        }
+        .neo-container {
+            display: flex;
+            flex-wrap: wrap;
+            text-align: center;
+            justify-content: space-around;
+        }
+        .neo-card:hover {
+            transform: scale(1.05); /* Scale the card slightly */
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Make the shadow more prominent on hover */
+        }
+        button {
+        background-color: green;
+        border: none;
+        color: white;
+        padding: 7px 14px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        }
+        button:hover {
+        background-color: greenyellow;
+        color: darkgreen; 
+        }  
+
+        
+
+    </style>
+</head>
+<body> 
+    <h1>NEO List</h1>
+    <div class="neo-container" id="neo-container">
+        <!-- NEO cards will be inserted here dynamically -->
+    </div>
+
+    <script>
+        // Pass the neosData from the Flask backend
+        const neosData = JSON.parse('{{ json_neos_data | tojson | safe }}');
+
+        
+        // Function to display NEO data in nicely formatted boxes
+        function displayNEOs(neosData) {
+            const neoContainer = document.getElementById('neo-container');
+
+            // Loop over the NEO data and create an HTML structure for each
+            neosData.forEach(neo => {
+                const neoCard = document.createElement('div');
+                neoCard.className = 'neo-card';
+
+                // Create the content for each NEO card
+                neoCard.innerHTML = `
+                    <h3><strong>Name: </strong>${neo.name}</h3>
+                    <p><strong>ID: </strong> ${neo.id}</p>
+                    <p><strong>Estimated Diameter: </strong> ${neo.estimated_diameter} meters</p>
+                    <p><strong>Orbiting Body: </strong> ${neo.orbiting_body}</p>
+                `;
+
+                // Append each card to the container
+                neoContainer.appendChild(neoCard);
+            });
+
+            // Display total number of NEOs
+            const totalNEOText = document.createElement('p');
+            totalNEOText.innerHTML = `<strong>Total NEOs:</strong> ${neosData.length}`;
+            document.body.appendChild(totalNEOText);
+        }
+
+        // Call the function to display the NEO data
+        displayNEOs(neosData);
+    </script>
+    <a href="{{ url_for('main.index') }}">
+        <button type="button" onclick="alert('Going back to homepage...') "  >Back to Home</button>
+    </a>
+</body>
+</html>

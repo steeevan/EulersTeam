@@ -12,7 +12,9 @@
             <p>This app provides a fun and engaging experience to help users learn more about space and the different wonders of the universe.</p>
       </div>
     <div>
-      <button type="button" onclick="alert('Going to the app...')">NEO APP</button>
+      <a href="{{ url_for('main.neopage') }}">
+            <button type="button" onclick="alert('Going to the NEO list..') "  >The NEO List</button>
+      </a>
       <a href="{{ url_for('main.aboutus') }}">
             <button type="button" onclick="alert('Going to the team members...') "  >About Us</button>
       </a>
