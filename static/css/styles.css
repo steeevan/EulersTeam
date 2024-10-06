@@ -16,7 +16,8 @@ button {background-color: green;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;}
+    font-size: 16px;
+}
 button:hover {
     background-color: greenyellow;
     color: darkgreen; 
@@ -28,5 +29,38 @@ h1 {
 
 p {
     font-size: 20px;
-    
+    text-align:center;
 }
+.column {
+    float: left;
+    width: 24.5%;
+    padding: 5px;
+  }
+  
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  .column {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .column img {
+    vertical-align: middle;
+  }
+  .column .text {
+    position: absolute;
+    bottom: 9;
+    color: #ffffff;
+    width: 100%;
+    padding: 20px;
+    font-weight: 900;
+    font-size: 10;
+
+  }
+  

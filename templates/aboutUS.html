@@ -5,16 +5,76 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>About Us</title>
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/styles.css')}}">
+      <style>
+      button {
+      background-color: green;
+      border: none;
+      color: white;
+      padding: 7px 14px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      position: absolute; bottom: 0;
+      margin-left: -75px;
+      }
+      button:hover {
+      background-color: greenyellow;
+      color: darkgreen; 
+      }     
+      body {
+      background-image: url("https://svs.gsfc.nasa.gov/vis/a010000/a014100/a014146/SupermassiveBinaryBlackHoles_desktop.png");
+      background-size: cover;
+      background-position: center top;
+      }
+      </style>
 </head>
 <body>
       <div>
-            <h1>About us</h1>
+            <h1>About Us</h1>
             <p>Team Members: Estevan, Brista, Alisa, Yanming</p>
-            <p>Roles: Estevan: Project Manager, Brista: Frontend Developer, Alisa: Research and Documentation Specialist, Yanming: Backend Developer</p>
+      </div>
+      <div class="row">
+            <div class="column">
+                  <img src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" alt="placeholder" style="width:85%">
+                  <div class="name">
+                        <h1>Estevan</h1>
+                  </div>
+                  <div class="text">
+                        <p>Estevan plays the role of being a project manager. He manages when every meeting is scheduled, and makes sure we are make progress and on task.</p>
+                  </div>
+            </div>
+            <div class="column">
+                  <img src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" alt="placeholder" style="width:85%">
+                  <div class="name">
+                        <h1>Brista</h1>
+                  </div>
+                  <div class="text">
+                        <p>placeholder</p>
+                  </div>
+            </div>
+            <div class="column">
+                  <img src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" alt="placeholder" style="width:85%">
+                  <div class="name">
+                        <h1>Alisa</h1>
+                  </div>
+                  <div class="text">
+                        <p>placeholder</p>
+                  </div>
+            </div>
+            <div class="column">
+                  <img src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" alt="placeholder" style="width:85%">
+                  <div class="name">
+                        <h1>Yanming</h1>
+                  </div>
+                  <div class="text">
+                        <p>Yanming is a certified python programmer. He is the freshman of middle school. Yanming is the backend developer who develops the user interface, makes the application user-friendly, and make it interactive.</p>
+                  </div>
+            </div>
       </div>
       <div>
             <a href="{{ url_for('main.index') }}">
-                  <button type="button" onclick="alert('Going back to homepage...') "  >Back</button>
+                  <button type="button" onclick="alert('Going back to homepage...') "  >Back to Home</button>
             </a>
       </div>
 </body>
