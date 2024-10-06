@@ -2,12 +2,15 @@ import requests
 from flask import Blueprint, render_template, jsonify, request
 from datetime import datetime, timedelta
 import json
+from datetime import datetime, timedelta
+import json
 
 class MainRoutes:
     def __init__(self):
         # Create a Blueprint for the main routes
         self.blueprint = Blueprint('main',__name__)
         self.register_routes()
+
 
 
     def register_routes(self):
@@ -17,10 +20,12 @@ class MainRoutes:
             return render_template('index.html')
         @self.blueprint.route('/aboutus')
         def aboutus():
-              return render_template('aboutUS.html')
+            return render_template('aboutUS.html')
         @self.blueprint.route('/neopage')
         def neopage():
-              return render_template('neopage.html',json_neos_data=neos_data)
+            return render_template('neopage.html',json_neos_data=neos_data)
+        def back(): 
+            return render_template('index.html')
         
 #test = MainRoutes()
 

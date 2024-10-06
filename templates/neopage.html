@@ -47,6 +47,23 @@
             transform: scale(1.05); /* Scale the card slightly */
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Make the shadow more prominent on hover */
         }
+        button {
+        background-color: green;
+        border: none;
+        color: white;
+        padding: 7px 14px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        }
+        button:hover {
+        background-color: greenyellow;
+        color: darkgreen; 
+        }  
 
         
 
@@ -93,5 +110,8 @@
         // Call the function to display the NEO data
         displayNEOs(neosData);
     </script>
+    <a href="{{ url_for('main.index') }}">
+        <button type="button" onclick="alert('Going back to homepage...') "  >Back to Home</button>
+    </a>
 </body>
 </html>
