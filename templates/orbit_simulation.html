@@ -6,6 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solar System Orbit Simulation with Planet and Asteroid Attributes</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/orbit_simulation.css') }}">
+    <style>
+        button {
+        background-color: green;
+        border: none;
+        color: white;
+        padding: 7px 14px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+        }
+        button:hover {
+        background-color: greenyellow;
+        color: darkgreen; 
+        }  
+    </style>
 </head>
 
 <body>
@@ -45,6 +64,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="{{ url_for('static', filename='js/orbit_simulation.js') }}"></script>
+    <a href="{{ url_for('main.index') }}">
+        <button type="button">Back to Home</button>
+    </a>
 </body>
 
 </html>
