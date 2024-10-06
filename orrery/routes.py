@@ -2,12 +2,15 @@ import requests
 from flask import Blueprint, render_template, jsonify, request
 from datetime import datetime, timedelta
 import json
+from datetime import datetime, timedelta
+import json
 
 class MainRoutes:
     def __init__(self):
         # Create a Blueprint for the main routes
         self.blueprint = Blueprint('main',__name__)
         self.register_routes()
+
 
 
     def register_routes(self):
