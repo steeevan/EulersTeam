@@ -4,21 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Orrery Web App</title>
-
-    
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/styles.css')}}">
 </head>
 <body>
-      <div id="top">
+      <div>
             <h1>Welcome to the Interactive Web App</h1>
             <p>This app provides a fun and engaging experience to help users learn more about space and the different wonders of the universe.</p>
       </div>
     <div>
       <a href="{{ url_for('main.aboutus') }}">
-            <button type="button" onclick="alert('Going to the team members..') "  >About the team</button>
+            <button type="button" onclick="alert('Going to the team members...') "  >About the team</button>
       </a>
     </div>
     
-    <button type="button" onclick="alert('Going to the app..')">Space App</button>
+    <button type="button" onclick="alert('Going to the app...')">Space App</button>
 </body>
 </html>

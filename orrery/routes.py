@@ -16,3 +16,6 @@ class MainRoutes:
         @self.blueprint.route('/aboutus')
         def aboutus():
               return render_template('aboutUS.html')
+        @self.blueprint.route("/index")
+        def back():
+              return render_template('index.html')
