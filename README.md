@@ -12,15 +12,15 @@ Here are some key features of the project:
    ![NEO](images/2.png)
    
 3. **About Us**
-   ![about](images/3.png)
+   ![about](images/6.png)
 
 4. **SImulation Orrery**
-   ![app](images/4.png)
+   ![app](images/3.png)
 
 5. **Fun Fact**
-   ![fun](images/5.png)
+   ![fun](images/4.png)
 
 6. **Planet**
-   ![pla](images/6.png)
+   ![pla](images/5.png)
 
 
