@@ -4,11 +4,23 @@
 
 Here are some key features of the project:
 
-1. **Interactive 3D Models**:
-   ![3D Model Render](https://example.com/3d-model.png)
-
-2. **Orbit Simulation**:
+1. **Orbit Simulation**:
    ![Orbit Simulation](images/1.png)
 
-3. **NEO LIST FROM API**
-4. ![NEO](images/2.png)
+
+2. **NEO LIST FROM API**
+   ![NEO](images/2.png)
+   
+3. **About Us**
+   ![about](images/3.png)
+
+4. **SImulation Orrery**
+   ![app](images/4.png)
+
+5. **Fun Fact**
+   ![fun](images/5.png)
+
+6. **Planet**
+   ![pla](images/6.png)
+
+
