@@ -1,6 +1,6 @@
 # Orrery Web App 
 **LINK**
-https://steeevan.pythonanywhere.com/facts
+https://steeevan.pythonanywhere.com/
 
 ## Features
 
