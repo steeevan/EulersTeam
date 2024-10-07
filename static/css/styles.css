@@ -4,7 +4,7 @@ body {
     color: white;
     text-decoration: wavy;
     font-family: Arial, Helvetica, sans-serif;
-    background-image: url("https://external-preview.redd.it/7BQ9Ig391FbwCzMSgnCCgrzbEpnWXufcUSKwe6g7GXI.jpg?auto=webp&s=7729ce0fa75865ea3e0a40076360938065072bfe");
+    background-image: url("/static/css/images/stars.jpg");
     background-size: cover;
     background-position: center top;
     font-weight: 900;

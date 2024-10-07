@@ -4,35 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEO PAGE</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/styles.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
+      body, html {
+          height: 100%;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+      }
+      
       #spacebutton {
             position: relative;
             bottom: -4px;
+            margin-bottom: 20px;
+      }
+      
+      #sun-container {
+          width: 500px;
+          height: 500px;
+          margin: 0 auto; /* Center the container horizontally */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .content {
+          text-align: center;
+          margin-bottom: 20px;
       }
     </style>
 </head>
 <body>
-      <div>
-            <h1>Welcome to the Interactive Web App</h1>
-            <p>This app provides a fun and engaging experience to help users learn more about space and the different wonders of the universe.</p>
-      </div>
-    <div>
-      <a href="{{ url_for('main.neopage') }}">
-            <button type="button" >The NEO List</button>
-      </a>
-      <a href="{{ url_for('main.aboutus') }}">
-            <button type="button"  >About Us</button>
-      </a>
-    </div>
-    <div id = "spacebutton">
-      <a href="{{ url_for('main.orbital') }}">
-            <button type="button" >Space Simulation</button>
-      </a>
-      <a href="{{ url_for('main.facts') }}">
-        <button type="button">Fun Facts</button>
-      </a>
+    <div class="content">
+        <h1>Welcome to the Interactive Web App</h1>
+        <p>This app provides a fun and engaging experience to help users learn more about space and the different wonders of the universe.</p>
     </div>
     
+    <div id="spacebutton">
+        <a href="{{ url_for('main.neopage') }}">
+            <button type="button">The NEO List</button>
+        </a>
+        <a href="{{ url_for('main.aboutus') }}">
+            <button type="button">About Us</button>
+        </a>
+        <a href="{{ url_for('main.orbital') }}">
+            <button type="button">Space Simulation</button>
+        </a>
+        <a href="{{ url_for('main.facts') }}">
+            <button type="button">Fun Facts</button>
+        </a>
+    </div>
+
+    <!-- 3D Render of the Sun -->
+    <div id="sun-container"></div>
+
+    <script>
+      // Setting up the scene, camera, and renderer for the Sun
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+      
+      // Create renderer with transparency enabled
+      const renderer = new THREE.WebGLRenderer({ alpha: true });
+      renderer.setSize(750, 750);
+      renderer.setClearColor(0x000000, 0); // Make the background transparent
+      document.getElementById('sun-container').appendChild(renderer.domElement);
+
+      // Creating a sphere to represent the Sun
+      const geometry = new THREE.SphereGeometry(2, 32, 32);
+      const texture = new THREE.TextureLoader().load("{{ url_for('static', filename='css/images/sun.jpg') }}");
+      const material = new THREE.MeshBasicMaterial({ map: texture });
+      const sun = new THREE.Mesh(geometry, material);
+      scene.add(sun);
+
+      camera.position.z = 5;
+
+      // Animation loop to rotate the Sun
+      function animate() {
+          requestAnimationFrame(animate);
+          sun.rotation.y += 0.005; // Rotate the Sun
+          renderer.render(scene, camera);
+      }
+      animate();
+    </script>
 </body>
 </html>
