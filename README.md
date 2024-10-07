@@ -8,4 +8,4 @@ Here are some key features of the project:
    ![3D Model Render](https://example.com/3d-model.png)
 
 2. **Orbit Simulation**:
-   ![Orbit Simulation](./images/orbit-simulation.png)
+   ![Orbit Simulation](images/1.png)
