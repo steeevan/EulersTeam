@@ -21,10 +21,11 @@
             border-radius: 8px;
             padding: 16px;
             margin: 10px;
-            background-color: #50e4ec;
+            background-color: #50e4ec8e;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 300px;
             display: inline-block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
         }
         .neo-card h3 {
             margin-top: 0;
@@ -46,6 +47,7 @@
         .neo-card:hover {
             transform: scale(1.05); /* Scale the card slightly */
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Make the shadow more prominent on hover */
+            background-color: #50e4ec;
         }
         button {
         background-color: green;

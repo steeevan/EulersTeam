@@ -100,7 +100,7 @@
             border-radius: 8px;
             padding: 16px;
             margin: 10px auto;
-            background-color: #dcc26bd8;
+            background-color: #ab9757;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 300px; /* Make the boxes smaller so they fit side by side */
             display: block;
@@ -157,6 +157,35 @@
         background-color: greenyellow;
         color: darkgreen; 
         }  
+        .image-button {
+            display: inline-block; /* Allows margin and padding */
+            border: none; /* Remove border */
+            background: none; /* Remove background */
+            padding: 0; /* Remove padding */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: transform 0.3s ease; /* Smooth scaling */
+        }
+
+        .image-button img {
+            width: 300px; /* Adjust size as needed */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px; /* Optional: rounded corners */
+            transition: transform 0.3s ease; /* Smooth scaling for image */
+        }
+
+        .image-button:hover img {
+            transform: scale(1.1); /* Scale image slightly on hover */
+        }
+        .satimage-button img {
+            width: 500px; /* Adjust size as needed */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px; /* Optional: rounded corners */
+            transition: transform 0.3s ease; /* Smooth scaling for image */
+        }
+
+        .satimage-button:hover img {
+            transform: scale(1.1); /* Scale image slightly on hover */
+        }
     
     </style>
 </head>
@@ -197,125 +226,62 @@
 
     <!-- Container for the image -->
 
-        <img src="static/css/images/mercury.webp" alt="Mercury"
+        <a href="{{ url_for('main.mercury') }}" class="image-button">
+            <img src="static/css/images/mercury.webp" alt="Mercury"
+        width="300" 
+        height="300" >
+
+        
+
+        <a href="{{ url_for('main.venus') }}" class="image-button">
+            <img src="static/css/images/file.png" alt="Venus"
         width="300" 
         height="300" >
 
 
-        <img src="static/css/images/file.png" alt="Venus"
+        <a href="{{ url_for('main.earth') }}" class="image-button">
+            <img src="static/css/images/earth-removebg-preview.png" alt="Earth"
         width="300" 
         height="300" >
 
-        <img src="static/css/images/earth-removebg-preview.png" alt="Earth"
+        
+
+        <a href="{{ url_for('main.mars') }}" class="image-button">
+            <img src="static/css/images/Mars.webp" alt="Mars"
+            width="300" 
+            height="300" >
+    
+
+
+        <a href="{{ url_for('main.jupiter') }}" class="image-button">
+            <img src="static/css/images/juptere.png" alt="Jupiter"
         width="300" 
         height="300" >
+        </a>
+        
 
-        <img src="static/css/images/Mars.webp" alt="Mars"
-        width="300" 
-        height="300" >
-
-        <img src="static/css/images/juptere.png" alt="Jupiter"
-        width="300" 
-        height="300" >
-
-        <img src="static/css/images/saturn-removebg-preview.png" alt="Saturn"
+        <a href="{{ url_for('main.saturn') }}" class="satimage-button">
+            <img src="static/css/images/saturn-removebg-preview.png" alt="Saturn"
         width="500" 
         height="300" >
+        </a>
+        
 
-        <img src="static/css/images/uran-removebg-preview.png" alt="Uranus"
+        <a href="{{ url_for('main.uranus') }}" class="image-button">
+            <img src="static/css/images/uran-removebg-preview.png" alt="Uranus"
         width="300" 
         height="300" >
+        </a>
+        
 
-        <img src="static/css/images/neprun-removebg-preview.png" alt="Neptune"
-        width="300" 
-        height="300" >
+        
+        <a href="{{ url_for('main.neptune') }}" class="image-button">
+            <img src="static/css/images/neprun-removebg-preview.png" alt="Neptune"
+            width="300" 
+            height="300" >
+        </a>
+        
 
-        <div class="text-row">
-            <!-- First text box -->
-            <div class="mercury-container">
-                <p>Mercury:
-                    First planet from the Sun, and smallest in the solar system.
-                    One of the terrestrial planets.
-                    Has the most eccentric orbit in the solar system.
-                    Named after the Roman god of messengers.
-                </p>
-            </div>
-    
-            <!-- Second text box -->
-            <div class="venus-container">
-                <p>Venus:
-                    Second planet from the Sun, and sixth largest.
-                    A terrestrial planet, and the hottest planet in the solar system
-                    Named after the Roman love goddess.
-                    Surface temperature hot enough to melt lead.
-                </p>
-            </div>
-            <div class="earth-container">
-                <p>Earth:
-                    The planet we live on.
-                    Third planet from the Sun, and terrestrial planet.
-                    Only known planet to support life.
-                    Is the fifth largest planet.
-                    One moon, our Earth.
-                    In the area known as the "goldilocks" zone.
-                </p>
-            </div>
-            <div class="mars-container">
-                <p>Mars:
-                    Mars is the fourth Planet from the Sun.
-                    Named for Roman god of war
-                    Its red because of oxidized iron in its soil
-                    Martian days are called sols.
-                    It has two small moons, Phobos and Deimos
-                    
-                </p>
-            </div>
-        </div>
-
-        <div class="text-row">
-
-            <!-- Second text box -->
-            <div class="jupiter-container">
-                <p>Jupiter:
-                    Largest and oldest planet in the solar system, and the
-                    Oldest planet in the solar system.
-                    Named after the king of Roman gods
-                    Has 95 moons total, and
-                    Four largest moons discovered by Galileo
-                    
-                </p>
-            </div>
-            <div class="saturn-container">
-                <p></p>Saturn:
-                    Sixth planet from the Sun, and second largest in the solar system.
-                    One of the gas giant planets.
-                    Named for Roman god of agriculture & wealth.
-                    Has rings, and 146 moons in orbit.
-                </p>
-            </div>
-            <div class="uranus-container">
-                <p>Uranus:
-                    Seventh planet from the Sun, and appears to spin sideways.
-                    Named for the Greek of the sky.
-                    Has 28 known moons.
-                    Ice giant, and
-                    planet is mostly swirling fluids
-                </p>
-            </div>
-    
-            <!-- Second text box -->
-            <div class="neptune-container">
-                <p>Neptune:
-                    Farthest planet from the Sun.
-                    First planet located by mathematical calculations.
-                    16 known moons, ice giant, and the windiest planet.
-                </p>
-            </div>
-        </div>
-        <div>
-            <a href="{{ url_for('main.index') }}">
-                  <button type="button">Back to Home</button>
-            </a>
-      </div>
+        
 </body>
 </html>

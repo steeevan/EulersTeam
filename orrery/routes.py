@@ -31,9 +31,34 @@ class MainRoutes:
         @self.blueprint.route('/facts')
         def facts():
               return render_template('facts.html')
+        @self.blueprint.route('/back')
         def back(): 
             return render_template('index.html')
         
+        @self.blueprint.route('/neptune')
+        def neptune(): 
+            return render_template('neptune.html')
+        @self.blueprint.route('/uranus')
+        def uranus(): 
+            return render_template('uranus.html')
+        @self.blueprint.route('/saturn')
+        def saturn(): 
+            return render_template('saturn.html')
+        @self.blueprint.route('/jupiter')
+        def jupiter(): 
+            return render_template('jupiter.html')
+        @self.blueprint.route('/mars')
+        def mars(): 
+            return render_template('mars.html')
+        @self.blueprint.route('/earth')
+        def earth(): 
+            return render_template('earth.html')
+        @self.blueprint.route('/venus')
+        def venus(): 
+            return render_template('venus.html')
+        @self.blueprint.route('/mercury')
+        def mercury(): 
+            return render_template('mercury.html')
 #test = MainRoutes()
 
 api_key = "Xgfq91jzvo3E3uo9cDFYW7Cw9fYNB6vz5g8RVkJJ"
